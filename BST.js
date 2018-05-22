@@ -163,9 +163,24 @@ function findThirdLargest(BST) {
   }
 }
 
+function shortestBranch(BST) {
+  console.log(BST.left.key);
+  return Math.min(BST.left && findHeight2(BST.left), BST.right && findHeight2(BST.right)) + 1;
+}
+
+function isBalanced(BST) {
+  let diff = findHeight2(BST) - shortestBranch(BST);
+  if (diff > 1) {
+    return 'This is not a balanced tree booo';
+  } else {
+    return 'This is a balanced tree yayayay';
+  }
+}
+
 function main() {
   const BST = new BinarySearchTree();
 
+  //UNBALANCED TREE
   BST.insert(3);
   BST.insert(1);
   BST.insert(4);
@@ -179,10 +194,18 @@ function main() {
 
   // BST.remove(3);
 
+  //BALANCED TREE
+  // BST.insert(5);
+  // BST.insert(4);
+  // BST.insert(6);
+  // BST.insert(3);
+  // BST.insert(7);
+
   // console.log(findHeight(BST));
   // console.log(findHeight2(BST));
   // console.log(isBST(BST));
-  console.log(findThirdLargest(BST));
+  // console.log(findThirdLargest(BST));
+  console.log(isBalanced(BST));
 }
 
 main();
