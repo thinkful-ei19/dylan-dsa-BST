@@ -11,7 +11,7 @@ class BinarySearchTree {
     if (this.key === null) {
       this.key = key;
       this.value = value;
-    } else if (key > this.key) {
+    } else if (key < this.key) {
       if (this.left === null) {
         this.left = new BinarySearchTree(key, value, this);
       } else {
@@ -140,6 +140,28 @@ function isBST(BST) {
 
 }
 
+let temp = new BinarySearchTree();
+
+function findThirdLargest(BST) {
+  if (BST) {
+    findThirdLargest(BST.left);
+    temp.insert(BST.key);
+    findThirdLargest(BST.right);
+  }
+
+  let curr = temp;
+  while (curr.right) {
+    curr = curr.right;
+  }
+
+  if (curr.parent && curr.parent.parent) {
+    return curr.parent.parent.key;
+  } else if (curr.parent && !curr.parent.parent) {
+    return 'Not enough values';
+  } else if (!curr.parent) {
+    return 'Not enough values';
+  }
+}
 
 function main() {
   const BST = new BinarySearchTree();
@@ -148,16 +170,19 @@ function main() {
   BST.insert(1);
   BST.insert(4);
   BST.insert(6);
-  BST.insert(9);
   BST.insert(2);
   BST.insert(5);
   BST.insert(7);
+  BST.insert(8);
+  BST.insert(9);
+  BST.insert(8);
 
   // BST.remove(3);
 
   // console.log(findHeight(BST));
-  console.log(findHeight2(BST));
+  // console.log(findHeight2(BST));
   // console.log(isBST(BST));
+  console.log(findThirdLargest(BST));
 }
 
 main();
