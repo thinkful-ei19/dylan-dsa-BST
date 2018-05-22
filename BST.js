@@ -110,6 +110,23 @@ function findHeight(BST) {
   } else {
     return rightHeight + 1;
   }
+}
+
+function isBST(BST) {
+
+  if (!BST) return true;
+
+  if (BST.left !== null && BST.key < BST.left.key) {
+    return false;
+  }
+
+  if (BST.right !== null && BST.key > BST.right.key) {
+    return false;
+  }
+
+  // return BST.left.key;
+
+  return isBST(BST.left) && isBST(BST.right);
 
 }
 
@@ -128,7 +145,8 @@ function main() {
 
   // BST.remove(3);
 
-  console.log(findHeight(BST));
+  // console.log(findHeight(BST));
+  console.log(isBST(BST));
 }
 
 main();
